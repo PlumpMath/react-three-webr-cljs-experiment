@@ -1,0 +1,2 @@
+{:require  [dumb-react-three-webvr-example-online.app]
+ :init-fns [dumb-react-three-webvr-example-online.app/init]}

@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>america</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #000000;
+        }
+        #three-box canvas {
+            display: block;
+            margin: auto;
+            padding: 0;
+            border : 0;
+        }
+    </style>
+    
+
+<script src="js/three.min.js"></script>
+
+<!-- react drives threejs -->
+<script src= "js/react-three.js"></script>
+
+
+<!-- VRControls.js acquires positional information from connected VR
+  devices and applies the transformations to a three.js camera object.
+  -->
+<script src="js/VRControls.js"></script>
+
+<!--
+  VREffect.js handles stereo camera setup and rendering.
+  -->
+<script src="js/VREffect.js"></script>
+
+<!--
+  A polyfill for WebVR using the Device{Motion,Orientation}Event API.
+  -->
+<script src="js/webvr-polyfill.js"></script>
+
+<!--
+  Helps enter and exit VR mode, provides best practices while in VR.
+  -->
+<script src="js/webvr-manager.js"></script>
+  </head>
+  <body>
+    <h1>dumb-react-three-webvr-example-online</h1>
+    <div id="three-box"></div>
+    <script type="text/javascript" src="js/app.js"></script>
+  </body>
+</html>
