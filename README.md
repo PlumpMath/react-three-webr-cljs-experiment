@@ -1,3 +1,5 @@
 [React-Three] (https://github.com/Izzimach/react-three)
 [WebVr-BoilerPlate] (https://github.com/borismus/webvr-boilerplate)
 [The Internet] (http://internet.com)
+![Incredible] (http://i.imgur.com/FcGjW18.gif)
+[Running Example] (https://dl.dropboxusercontent.com/spa/3w8c143zq8so165/dumb-react-three/index.html)
