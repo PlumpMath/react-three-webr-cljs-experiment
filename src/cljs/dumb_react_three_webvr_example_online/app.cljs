@@ -1,7 +1,9 @@
 (ns dumb-react-three-webvr-example-online.app
-  (:require-macros [dumb-react-three-webvr-example-online.macros :refer [+=]])
+  (:require-macros [dumb-react-three-webvr-example-online.macros :refer [+=]]
+                   [cljs.core.async.macros :refer [go go-loop]])
   (:import [goog.ui IdGenerator])
-  (:require [goog.debug :as debug]))
+  (:require [goog.debug :as debug]
+            [cljs.core.async :as async :refer [>! <! put! chan sliding-buffer pub sub]]))
 
 (enable-console-print!)
 
@@ -9,8 +11,6 @@
   (aget obj attr-name))
 
 (def window (partial grab-nested-attr js/window))
-
-(def ^:dynamic *component* nil)
 
 (defn random-radian []
   (* (js/Math.random) js/Math.PI))
@@ -26,7 +26,8 @@
 (def obj-3d js/ReactTHREE.Object3D)
 (def mesh-factory (js/React.createFactory js/ReactTHREE.Mesh))
 (def box-geometry (js/THREE.BoxGeometry. 200 200 200))
-(def mesh-material (js/THREE.MeshBasicMaterial. #js {:color "red"}))
+(def mesh-material-red (js/THREE.MeshBasicMaterial. #js {:color "red"}))
+(def mesh-material-blue (js/THREE.MeshBasicMaterial. #js {:color "blue"}))
 
 
 (def Cupcake (create-class #js {:displayName "Cupcake"
@@ -38,11 +39,13 @@
                                                          :position (or (aget  this "props" "position") (js/THREE.Vector3. 0 0 0))}
                                                     (mesh-factory #js {:position (js/THREE.Vector3. 0 -100 0)
                                                                        :geometry box-geometry
-                                                                       :material mesh-material
+                                                                       :onPick (fn []
+                                                                                 (println "whatever"))
+                                                                       :material mesh-material-red
                                                                        })
                                                     (mesh-factory #js {:position (js/THREE.Vector3. 0 100 0)
                                                                        :geometry box-geometry
-                                                                       :material mesh-material
+                                                                       :material mesh-material-blue
                                                                        })
                                                     )))}))
 
@@ -96,6 +99,8 @@
                                                    0)
                             quaternion (aget scene-props "cupcakedata" "quaternion")]
                         (.. quaternion (setFromEuler euler))
+                        (aset scene-props "width" (aget js/window "innerWidth"))
+                        (aset scene-props "height" (aget js/window "innerHeight"))
                         (aset cupcakeprops "position" "x" (* 300 (js/Math.sin rotation-angle)))
                         (.. react-instance (setProps scene-props))
                         (js/requestAnimationFrame spincupcake)

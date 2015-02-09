@@ -4,7 +4,7 @@
  :dependencies '[[adzerk/boot-cljs      "0.0-2760-0" :scope "test"]
                  [adzerk/boot-cljs-repl "0.1.8"      :scope "test"]
                  [adzerk/boot-reload    "0.2.4"      :scope "test"]
-                 [cljsjs/react "0.12.2-4"]
+                 [org.clojure/core.async "0.1.346.0-17112a-alpha"]
                  [pandeiro/boot-http    "0.5.2"      :scope "test"]])
 
 (require
